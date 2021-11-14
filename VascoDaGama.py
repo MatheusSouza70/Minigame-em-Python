@@ -1,18 +1,13 @@
+# importando a biblioteca PySimpleGUI para a interface
 import PySimpleGUI as sg
 
 # Procurando brechas sobre como os usuários podem responder as perguntas.
-answer_A = ["A", "a"]
-answer_B = ["B", "b"]
-answer_C = ["C", "c"]
 yes = ["S", "s", "sim"]
 no = ["N", "n", "nao", "não"]
 
 # Objetos
 espada = 0
 flor = 0
-
-# aviso ao usuário sobre o limite de respostas
-required = ("\nUse apenas A, B, or C\n")
 
 # Primeira janela
 
@@ -27,7 +22,7 @@ def janela_inicial():
         [sg.Text('Clique em ok para continuar')],
         [sg.Button('Sair'), sg.Button('Ok')]
     ]
-    return sg.Window("A história começa", layout=layout, finalize=True, )
+    return sg.Window("Vamos ??", layout=layout, finalize=True, size=(300, 180))
 
 # segunda janela
 
@@ -46,6 +41,8 @@ def janela_comeco():
     ]
     return sg.Window("A história começa", layout=layout, finalize=True, size=(450, 400))
 
+# escolha jogar pedra
+
 
 def janela_choicePedra():
     sg.theme("Reddit")
@@ -57,6 +54,8 @@ def janela_choicePedra():
     ]
     return sg.Window("Uma pedra ??", layout=layout, finalize=True)
 
+# escolha deitar e esperar ser atacado
+
 
 def janela_choiceDeitar():
     sg.theme("Reddit")
@@ -66,6 +65,8 @@ def janela_choiceDeitar():
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
     return sg.Window("Rápido como o vento", layout=layout, finalize=True, size=(300, 100))
+
+# escolha correr
 
 
 def janela_choiceCorrer():
@@ -79,6 +80,8 @@ def janela_choiceCorrer():
     ]
     return sg.Window("The Flash ?", layout=layout, finalize=True)
 
+# esxolha de jogar a pedra e acabar morrendo
+
 
 def janela_choicePedraF():
     sg.theme("Reddit")
@@ -90,6 +93,8 @@ def janela_choicePedraF():
 
     ]
     return sg.Window("Não foi dessa vez", layout=layout, finalize=True)
+
+# escolha da caverna
 
 
 def janela_choiceCaverna():
@@ -104,6 +109,8 @@ def janela_choiceCaverna():
     ]
     return sg.Window("A caverna pegar ou largar ", layout=layout, finalize=True)
 
+# escolha depois de pegar a espada
+
 
 def janela_choiceEspada():
     sg.theme("Reddit")
@@ -115,6 +122,8 @@ def janela_choiceEspada():
         [sg.Text('Correr'), sg.Button('C')]
     ]
     return sg.Window("E agora ??", layout=layout, finalize=True)
+
+# escolha de lutar após pegar a espada
 
 
 def janela_choiceEspada1():
@@ -129,6 +138,8 @@ def janela_choiceEspada1():
     ]
     return sg.Window("Grande Final", layout=layout, finalize=True)
 
+# escolha de lutar sem ter pego a espada
+
 
 def janela_choiceEspada0():
     sg.theme("Reddit")
@@ -138,6 +149,8 @@ def janela_choiceEspada0():
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
     return sg.Window("Por uma espada..", layout=layout, finalize=True)
+
+# escolha de ficar no escuro
 
 
 def janela_choiceEscuro():
@@ -149,6 +162,8 @@ def janela_choiceEscuro():
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
 
+# escolha de se esconder atrás da rocha
+
 
 def janela_choiceRocha():
     sg.theme("Reddit")
@@ -157,7 +172,9 @@ def janela_choiceRocha():
         [sg.Text('Você morreu!')],
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
-    return sg.Window("Não foi dessa vez", layout=layout, finalize=True)
+    return sg.Window("Não foi dessa vez", layout=layout, finalize=True, size=(270, 100))
+
+# escolha de fazer armadilha
 
 
 def janela_choiceArmadilha():
@@ -167,7 +184,9 @@ def janela_choiceArmadilha():
         [sg.Text('Você morreu')],
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
-    return sg.Window("Não foi dessa vez", layout=layout, finalize=True)
+    return sg.Window("Não foi dessa vez", layout=layout, finalize=True, size=(270, 100))
+
+# escolha de ir para cidade
 
 
 def janela_choiceCidade():
@@ -184,6 +203,8 @@ def janela_choiceCidade():
     ]
     return sg.Window("A cidade", layout=layout, finalize=True)
 
+# escolha de pegar a flor
+
 
 def janela_choiceFlor1():
     sg.theme("Reddit")
@@ -197,6 +218,8 @@ def janela_choiceFlor1():
     ]
     return sg.Window("You win!!", layout=layout, finalize=True)
 
+# escolha de não pegar a flor
+
 
 def janela_choiceFlor0():
     sg.theme("Reddit")
@@ -208,16 +231,19 @@ def janela_choiceFlor0():
     return sg.Window("You lose..", layout=layout, finalize=True)
 
 
+# definindo o valor das variaveis
 janela1, janela2 = janela_inicial(), None
 janela3 = None
 janela4 = None
 janela5 = None
 janela6 = None
-
+# utilizando listas para definir o valor das variaveis
 yes = ["S", "s", "sim", "Sim"]
 no = ["N", "n", "nao", "não"]
 
+# estrutura de repetição
 while True:
+    # definindo para as variaveis serem lidas em todas as janelas / verificando condições e escolhas
     window, event, values = sg.read_all_windows()
     # Escolha página inicial
     if window == janela1 and event == sg.WIN_CLOSED:
@@ -245,13 +271,13 @@ while True:
     if window == janela3 and event == sg.WIN_CLOSED:
         break
     if window == janela3 and event == 'A':
-        janela4 = janela_choiceCorrer()
+        janela4 = janela_choiceRocha()
         janela3.hide()
     if window == janela3 and event == 'B':
         janela4 = janela_choicePedraF()
         janela3.hide()
     if window == janela3 and event == 'C':
-        janela5 = janela_choiceCidade()
+        janela4 = janela_choiceCidade()
         janela3.hide()
 
     # janela 4
@@ -376,7 +402,7 @@ while True:
             janela5 = janela_choiceEspada()
             janela4.hide()
             espada = 0
-
+    # janela de escolha dentro da caverna
     if window == janela5 and event == sg.WIN_CLOSED:
         break
     if window == janela5 and event == 'A':
@@ -392,7 +418,7 @@ while True:
     if window == janela5 and event == 'C':
         janela3 = janela_choiceCorrer()
         janela5.hide()
-
+    # janela final
     if window == janela6 and event == sg.WIN_CLOSED:
         break
     if window == janela6 and event == 'Recomeçar??':
