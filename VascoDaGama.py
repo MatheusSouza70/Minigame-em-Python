@@ -1,4 +1,3 @@
-import time
 import PySimpleGUI as sg
 
 # Procurando brechas sobre como os usuários podem responder as perguntas.
@@ -76,7 +75,7 @@ def janela_choiceCorrer():
                  "a velocidade do Orc é muito grande. Você irá: ")],
         [sg.Text('Esconder-se atrás da rocha '), sg.Button('A')],
         [sg.Text('Fazer uma armadilha, e então lutar'), sg.Button('B')],
-        [sg.Text('Corra em direção a um cidade abandonada'), sg.Button('C')]
+        [sg.Text('Corra em direção a um cidade'), sg.Button('C')]
     ]
     return sg.Window("The Flash ?", layout=layout, finalize=True)
 
@@ -103,26 +102,127 @@ def janela_choiceCaverna():
         [sg.Input(key='resposta')],
         [sg.Button('Ok')]
     ]
+    return sg.Window("A caverna pegar ou largar ", layout=layout, finalize=True)
 
 
 def janela_choiceEspada():
     sg.theme("Reddit")
     layout = [
-        []
+        [sg.Text(
+            "\n O Orc continua a te perseguir, você está em apuros. O que fará em seguida? ")],
+        [sg.Text('Se esconder em silêncio'), sg.Button('A')],
+        [sg.Text('Lutar'), sg.Button('B')],
+        [sg.Text('Correr'), sg.Button('C')]
     ]
+    return sg.Window("E agora ??", layout=layout, finalize=True)
+
+
+def janela_choiceEspada1():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text("\nVocê ficou esperando. A espada cintilante atraiu "
+                 "o Orc,\nque pensou que você não era páreo.\nEnquanto ele caminhava "
+                 "cada vez mais perto,\nseu coração bate mais rápido. Como o Orc "
+                 "estendeu a mão para agarrar a espada,\nvocê perfurou a lâmina em "
+                 "seu peito. \n \n Você sobreviveu! ")],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+    return sg.Window("Grande Final", layout=layout, finalize=True)
+
+
+def janela_choiceEspada0():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text(
+            "\n Você deveria ter pegado aquela espada.\nVocê está indefeso. \n Você morreu! ")],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+    return sg.Window("Por uma espada..", layout=layout, finalize=True)
+
+
+def janela_choiceEscuro():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text("\nMesmo? Você vai se esconder no escuro?\nEu penso que "
+                 "Orcs podem ver muito bem no escuro, certo?\nNão tenho certeza, mas "
+                 "Vou com SIM, então ... \n Você morreu! ")],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+
+
+def janela_choiceRocha():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text('Você foi facilmente visto')],
+        [sg.Text('Você morreu!')],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+    return sg.Window("Não foi dessa vez", layout=layout, finalize=True)
+
+
+def janela_choiceArmadilha():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text('Você não é pareo para o orc')],
+        [sg.Text('Você morreu')],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+    return sg.Window("Não foi dessa vez", layout=layout, finalize=True)
+
+
+def janela_choiceCidade():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text("\nEnquanto corre freneticamente, você percebe uma espada enferrujada "
+                 "caída na lama. Você rapidamente se abaixa e a pega,\n"
+                 "\nmas erra. Você tenta acalmar sua respiração pesada enquanto se esconde "
+                 "\natrás de um edifício delapitado, esperando o Orc chegar "
+                 "\ncorrendo na esquina. Você nota uma flor roxa "
+                 "\nperto do seu pé. Você a pega? Sim / Não?")],
+        [sg.Input(key='resposta')],
+        [sg.Button('Ok')]
+    ]
+    return sg.Window("A cidade", layout=layout, finalize=True)
+
+
+def janela_choiceFlor1():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text("\nVocê rapidamente pega a flor roxa, de alguma forma "
+                 "\nesperando que isso pare o Orc. Pare! \nO Orc estava apenas procurando "
+                 "por amor. "
+                 "\nIsso foi bem estranho... Mas você sobreviveu! ")],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+
+    ]
+    return sg.Window("You win!!", layout=layout, finalize=True)
+
+
+def janela_choiceFlor0():
+    sg.theme("Reddit")
+    layout = [
+        [sg.Text("\nTalvez você devesse ter pego a flor... "
+                 "\nVocê morre esmagado pelo Orc. ")],
+        [sg.Button('Recomeçar??'), sg.Button('Sair..')]
+    ]
+    return sg.Window("You lose..", layout=layout, finalize=True)
 
 
 janela1, janela2 = janela_inicial(), None
 janela3 = None
 janela4 = None
 janela5 = None
+janela6 = None
+
+yes = ["S", "s", "sim", "Sim"]
+no = ["N", "n", "nao", "não"]
 
 while True:
     window, event, values = sg.read_all_windows()
     # Escolha página inicial
     if window == janela1 and event == sg.WIN_CLOSED:
         break
-    if window == janela1 and event == 'sair':
+    if window == janela1 and event == 'Sair':
         break
     if window == janela1 and event == 'Ok':
         janela2 = janela_comeco()
@@ -145,19 +245,89 @@ while True:
     if window == janela3 and event == sg.WIN_CLOSED:
         break
     if window == janela3 and event == 'A':
-        janela4 = janela_choiceCorrer
+        janela4 = janela_choiceCorrer()
         janela3.hide()
     if window == janela3 and event == 'B':
         janela4 = janela_choicePedraF()
         janela3.hide()
     if window == janela3 and event == 'C':
-        janela4 = janela_choiceCaverna
+        janela5 = janela_choiceCidade()
+        janela3.hide()
+
+    # janela 4
+    if window == janela4 and event == sg.WIN_CLOSED:
+        break
+    if window == janela4 and event == 'A':
+        janela5 = janela_choiceRocha()
+        janela4.hide()
+    if window == janela4 and event == 'B':
+        janela5 = janela_choiceArmadilha()
+        janela4.hide()
+    if window == janela4 and event == 'C':
+        janela5 = janela_choiceCidade()
+        janela4.hide()
+
+    # morte choice rocha
+    if window == janela5 and event == sg.WIN_CLOSED:
+        break
+    if window == janela5 and event == ('Recomeçar??'):
+        janela1 = janela_inicial()
+        janela5.hide()
+    if window == janela5 and event == ('Sair..'):
+        break
+
+    # choice cidade
+    if window == janela5 and event == sg.WIN_CLOSED:
+        break
+    if event == 'Ok':
+        if window == janela5 and values['resposta'] == yes[0]:
+            janela6 = janela_choiceFlor1()
+            janela5.hide()
+            flor = 1  # adiciona a flor a seu inventario
+        if window == janela5 and values['resposta'] == yes[1]:
+            janela6 = janela_choiceFlor1()
+            janela5.hide()
+            flor = 1
+        if window == janela5 and values['resposta'] == yes[2]:
+            janela6 = janela_choiceFlor1()
+            janela5.hide()
+            flor = 1
+        if window == janela5 and values['resposta'] == yes[3]:
+            janela6 = janela_choiceFlor1()
+            janela5.hide()
+            flor = 1
+        if window == janela5 and values['resposta'] == no[0]:
+            flor = 0
+            janela6 = janela_choiceFlor0()
+            janela5.hide()
+        if window == janela5 and values['resposta'] == no[1]:
+            flor = 0
+            janela6 = janela_choiceFlor0()
+            janela5.hide()
+        if window == janela5 and values['resposta'] == no[2]:
+            flor = 0
+            janela6 = janela_choiceFlor0()
+            janela5.hide()
+        if window == janela5 and values['resposta'] == no[3]:
+            flor = 0
+            janela6 = janela_choiceFlor0()
+            janela5.hide()
+
+    # cidade win
+    if window == janela6 and event == sg.WIN_CLOSED:
+        break
+    if window == janela6 and event == ('Recomeçar??'):
+        janela1 = janela_inicial()
+        janela6.hide()
+    if window == janela6 and event == ('Sair..'):
+        break
 
     # choice pedraF
     if window == janela4 and event == sg.WIN_CLOSED:
         break
     if window == janela4 and event == ('Recomeçar??'):
         janela1 = janela_inicial()
+        janela4.hide()
     if window == janela4 and event == ('Sair..'):
         break
 
@@ -174,13 +344,59 @@ while True:
     if window == janela4 and event == sg.WIN_CLOSED:
         break
     if window == janela4 and event == 'Ok':
-        if values['resposta'] == yes:
+        if values['resposta'] == yes[0]:
             janela5 = janela_choiceEspada()
             janela4.hide()
             espada = 1
-        if values['resposta'] == no:
+        if values['resposta'] == yes[1]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 1
+        if values['resposta'] == yes[2]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 1
+        if values['resposta'] == yes[3]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 1
+        if values['resposta'] == no[0]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 0
+        if values['resposta'] == no[1]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 0
+        if values['resposta'] == no[2]:
+            janela5 = janela_choiceEspada()
+            janela4.hide()
+            espada = 0
+        if values['resposta'] == no[3]:
             janela5 = janela_choiceEspada()
             janela4.hide()
             espada = 0
 
-# Faltando choice A depois da escolha A
+    if window == janela5 and event == sg.WIN_CLOSED:
+        break
+    if window == janela5 and event == 'A':
+        janela6 = janela_choiceEscuro()
+        janela5.hide()
+    if window == janela5 and event == 'B':
+        if espada > 0:
+            janela6 = janela_choiceEspada1()
+            janela5.hide()
+        else:
+            janela6 = janela_choiceEspada0()
+            janela5.hide()
+    if window == janela5 and event == 'C':
+        janela3 = janela_choiceCorrer()
+        janela5.hide()
+
+    if window == janela6 and event == sg.WIN_CLOSED:
+        break
+    if window == janela6 and event == 'Recomeçar??':
+        janela1 = janela_inicial()
+        janela6.hide()
+    if window == janela6 and event == 'Sair..':
+        break
