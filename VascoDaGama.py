@@ -161,6 +161,7 @@ def janela_choiceEscuro():
                  "Vou com SIM, então ... \n Você morreu! ")],
         [sg.Button('Recomeçar??'), sg.Button('Sair..')]
     ]
+    return sg.Window("Não muito inteligente ", layout=layout, finalize=True)
 
 # escolha de se esconder atrás da rocha
 
@@ -283,8 +284,8 @@ while True:
     if window == janelaAA and event == 'C':
         janela4 = janela_choiceCaverna()
         janelaAA.hide()
-
-     # janela 4
+    
+    # janela 4
     if window == janela3 and event == sg.WIN_CLOSED:
         break
     if window == janela3 and event == 'A':
@@ -296,6 +297,15 @@ while True:
     if window == janela3 and event == 'C':
         janelaC = janela_choiceCidade()
         janela3.hide()
+        
+    #morte choice rocha c -> a
+    if window == janela5 and event == sg.WIN_CLOSED:
+        break
+    if window == janela5 and event == ('Recomeçar??'):
+        janela1 = janela_inicial()
+        janela3.hide()
+    if window == janela5 and event == ('Sair..'):
+        break
 
     # morte choice rocha
     if window == janela4 and event == sg.WIN_CLOSED:
